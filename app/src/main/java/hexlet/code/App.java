@@ -1,5 +1,6 @@
 package hexlet.code;
 
+
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -25,14 +26,29 @@ public class App implements Callable<Integer> {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
-
-
+//
+//
     @Override
-    public Integer call() throws Exception {
-        String readFilePath = filePath1;
-        Path path = Paths.get(readFilePath).toAbsolutePath().normalize();
+    public Integer call() throws IOException {
+        filePath1 = "file1.json";
+        filePath2 = "file2.json";
+        Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
+        Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
+        // проверим существование файлов
+        isFileExists(path1);
+        isFileExists(path2);
+        // получим содержимое файлов
+        String content1 = null;
+        content1 = Files.readString(path1);
+        String content2 = null;
+        content2 = Files.readString(path2);
+        // найдем отличия
+        String result = String.valueOf(Differ.getDiff(content1, content2));
+        System.out.println(result);
+        return 0;
+    }
 
-        // Проверяем существование файла
+    public static void isFileExists(Path path) {
         if (!Files.exists(path)) {
             try {
                 throw new Exception("File '" + path + "' does not exist");
@@ -40,13 +56,5 @@ public class App implements Callable<Integer> {
                 throw new RuntimeException(e);
             }
         }
-        String content;
-        try {
-            content = Files.readString(path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(content);
-        return null;
     }
 }
