@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.*;
@@ -41,9 +41,10 @@ public class Differ {
     public static Map<String, Object> getData(String content) {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> data = null;
+        TypeReference<HashMap<String, Object>> typeReference = new TypeReference<>() {};
         try {
-            data = mapper.readValue(content, HashMap.class);
-        } catch (JsonProcessingException e) {
+            data = mapper.readValue(content, typeReference);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return data;
