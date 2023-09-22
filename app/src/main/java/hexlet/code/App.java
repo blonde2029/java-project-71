@@ -7,9 +7,6 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
@@ -26,35 +23,13 @@ public class App implements Callable<Integer> {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
-//
-//
     @Override
     public Integer call() throws IOException {
-        filePath1 = "file1.json";
-        filePath2 = "file2.json";
-        Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
-        Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
-        // проверим существование файлов
-        isFileExists(path1);
-        isFileExists(path2);
-        // получим содержимое файлов
-        String content1 = null;
-        content1 = Files.readString(path1);
-        String content2 = null;
-        content2 = Files.readString(path2);
+//        filePath1 = "file1.json";
+//        filePath2 = "file2.json";
         // найдем отличия
-        String result = String.valueOf(Differ.getDiff(content1, content2));
+        String result = String.valueOf(Differ.getDiff(filePath1, filePath2));
         System.out.println(result);
         return 0;
-    }
-
-    public static void isFileExists(Path path) {
-        if (!Files.exists(path)) {
-            try {
-                throw new Exception("File '" + path + "' does not exist");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 }
