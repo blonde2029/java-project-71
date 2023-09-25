@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 
@@ -11,8 +12,15 @@ application {
 compileJava {
     options.release = 20
 }
-
-
+test {
+    finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+    }
+}
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
 
@@ -26,8 +34,4 @@ dependencies {
     implementation 'info.picocli:picocli:4.7.5'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.4'
     implementation 'org.assertj:assertj-core:3.24.2'
-}
-
-test {
-    useJUnitPlatform()
 }
