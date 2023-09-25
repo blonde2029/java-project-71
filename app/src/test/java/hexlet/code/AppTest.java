@@ -12,7 +12,10 @@ public class AppTest {
     String path2;
     @BeforeEach
     void beforeEach() {
-//        /home/blonde2029/java-project-71/app/src/test/resources
+//        String path = "src/test/resources";
+//
+//        File file = new File(path);
+//        String absolutePath = file.getAbsolutePath();
         path1 = "/home/blonde2029/java-project-71/app/src/test/resources/file1.json";
         path2 = "/home/blonde2029/java-project-71/app/src/test/resources/file2.json";
     }
