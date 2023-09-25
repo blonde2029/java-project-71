@@ -3,6 +3,7 @@ package hexlet.code;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,18 +11,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AppTest {
     String path1;
     String path2;
+    String absolutePath;
     @BeforeEach
     void beforeEach() {
-//        String path = "src/test/resources";
-//
-//        File file = new File(path);
-//        String absolutePath = file.getAbsolutePath();
-        path1 = "/home/blonde2029/java-project-71/app/src/test/resources/file1.json";
-        path2 = "/home/blonde2029/java-project-71/app/src/test/resources/file2.json";
+        String path = "src/test/resources";
+        File file = new File(path);
+        absolutePath = file.getAbsolutePath();
+//        path1 = "/home/blonde2029/java-project-71/app/src/test/resources/file1.json";
+//        path2 = "/home/blonde2029/java-project-71/app/src/test/resources/file2.json";
     }
 
     @Test
     public void appTest() throws IOException {
+        path1 = absolutePath + "/file1.json";
+        path2 = absolutePath + "/file2.json";
         String actual = String.valueOf(Differ.getDiff(path1, path2));
         String expected = """
                 {
