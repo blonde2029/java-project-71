@@ -21,7 +21,7 @@ jobs:
       - name: Test code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
-          CC_TEST_REPORTER_ID: abead73108b9cf2e78704e85e33d3cec366ce3f602262d55848324955a8bff5f
+          CC_TEST_REPORTER_ID: ${{ secrets.TESTCOVARAGE_71 }}
           JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
         with:
           workingDirectory: app
