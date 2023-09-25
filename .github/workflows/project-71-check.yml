@@ -14,12 +14,6 @@ jobs:
         with:
           distribution: 'oracle'
           java-version: '20'
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: 8.2.1
-          arguments: build
-          build-root-directory: app
       - name: Test code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
