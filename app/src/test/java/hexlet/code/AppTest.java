@@ -17,15 +17,13 @@ public class AppTest {
         String path = "src/test/resources";
         File file = new File(path);
         absolutePath = file.getAbsolutePath();
-//        path1 = "/home/blonde2029/java-project-71/app/src/test/resources/file1.json";
-//        path2 = "/home/blonde2029/java-project-71/app/src/test/resources/file2.json";
     }
 
     @Test
-    public void appTest() throws IOException {
+    public void appTestJSON() throws IOException {
         path1 = absolutePath + "/file1.json";
         path2 = absolutePath + "/file2.json";
-        String actual = String.valueOf(Differ.getDiff(path1, path2));
+        String actual = String.valueOf(Differ.getDiffJSON(path1, path2));
         String expected = """
                 {
                  - follow: false
@@ -33,6 +31,22 @@ public class AppTest {
                  - proxy: 123.234.53.22
                  - timeout: 50
                  + timeout: 21
+                 + verbose: true
+                }""";
+        assertThat(actual).isEqualTo(expected);
+    }
+    @Test
+    public void appTestYAML() throws IOException {
+        path1 = absolutePath + "/file1.yml";
+        path2 = absolutePath + "/file2.yml";
+        String actual = String.valueOf(Differ.getDiffYAML(path1, path2));
+        String expected = """
+                {
+                 - follow: false
+                   host: hexlet.io
+                 - proxy: 123.234.53.22
+                 - timeout: 50
+                 + timeout: 29
                  + verbose: true
                 }""";
         assertThat(actual).isEqualTo(expected);
