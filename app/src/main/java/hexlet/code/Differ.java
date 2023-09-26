@@ -65,16 +65,22 @@ public class Differ {
                 .forEach(i -> {
                     if (data1.containsKey(i.getKey()) && !data2.containsKey(i.getKey())) {
                         diffs.add(" - " + i.getKey() + ": " + i.getValue());
-                    } else if (data1.containsKey(i.getKey()) && data2.containsKey(i.getKey())
-                            && data1.get(i.getKey()).equals(data2.get(i.getKey()))) {
-                        diffs.add("   " + i.getKey() + ": " + i.getValue());
-                    } else if (data1.containsKey(i.getKey()) && data2.containsKey(i.getKey())
-                            && !data1.get(i.getKey()).equals(data2.get(i.getKey()))) {
-                        diffs.add(" - " + i.getKey() + ": " + data1.get(i.getKey()));
-                        diffs.add(" + " + i.getKey() + ": " + i.getValue());
                     } else if (!data1.containsKey(i.getKey()) && data2.containsKey(i.getKey())) {
                         diffs.add(" + " + i.getKey() + ": " + i.getValue());
+                    } else if (data1.containsKey(i.getKey()) && data2.containsKey(i.getKey())) {
+                        if (data1.get(i.getKey()) == null || data2.get(i.getKey()) == null) {
+                            diffs.add(" - " + i.getKey() + ": " + data1.get(i.getKey()));
+                            diffs.add(" + "  +i.getKey() + ": " + data2.get(i.getKey()));
+                        } else if (data1.get(i.getKey()).equals(data2.get(i.getKey()))) {
+                            diffs.add("   " + i.getKey() + ": " + i.getValue());
+                        } else if (data1.get(i.getKey()) == data2.get(i.getKey())) {
+                            diffs.add("   " + i.getKey() + ": " + i.getValue());
+                        } else {
+                            diffs.add(" - " + i.getKey() + ": " + data1.get(i.getKey()));
+                            diffs.add(" + "  +i.getKey() + ": " + data2.get(i.getKey()));
+                        }
                     }
+
                 });
         return diffs;
     }
