@@ -4,16 +4,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 
 public class Differ {
-    public static StringBuilder getDiffJSON(String filePath1, String filePath2) throws IOException {
+    public static List<DiffAnalizer> getDiffJSON(String filePath1, String filePath2) throws IOException {
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
-        System.out.println(path1);
+
         isFileExists(path1);
         isFileExists(path2);
 
@@ -22,22 +23,17 @@ public class Differ {
 
         Map<String, Object> data1 = Parser.getDataJSON(content1);
         Map<String, Object> data2 = Parser.getDataJSON(content2);
-        java.util.TreeMap<String, Object> allData = new java.util.TreeMap<>();
+        TreeMap<String, Object> allData = new java.util.TreeMap<>();
         allData.putAll(data1);
         allData.putAll(data2);
 
-        java.util.List<String> diffs = buildResult(data1, data2, allData);
-         //выведем теперь в строку в нужном формате
-        StringBuilder result = new StringBuilder();
-        result.append("{\n");
-        diffs.stream().forEach(i -> result.append(i + "\n"));
-        result.append("}");
-        return result;
+        List<DiffAnalizer> diffs = buildResult(data1, data2, allData);
+        return diffs;
     }
-    public static StringBuilder getDiffYAML(String filePath1, String filePath2) throws IOException {
+    public static List<DiffAnalizer> getDiffYAML(String filePath1, String filePath2) throws IOException {
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
-        System.out.println(path1);
+
         isFileExists(path1);
         isFileExists(path2);
 
@@ -46,38 +42,34 @@ public class Differ {
 
         Map<String, Object> data1 = Parser.getDataYAML(content1);
         Map<String, Object> data2 = Parser.getDataYAML(content2);
-        java.util.TreeMap<String, Object> allData = new java.util.TreeMap<>();
+        TreeMap<String, Object> allData = new TreeMap<>();
         allData.putAll(data1);
         allData.putAll(data2);
 
-        java.util.List<String> diffs = buildResult(data1, data2, allData);
-        //выведем теперь в строку в нужном формате
-        StringBuilder result = new StringBuilder();
-        result.append("{\n");
-        diffs.stream().forEach(i -> result.append(i + "\n"));
-        result.append("}");
-        return result;
+        List<DiffAnalizer> diffs = buildResult(data1, data2, allData);
+        return diffs;
     }
-    private static List<String> buildResult(Map<String, Object> data1, Map<String, Object> data2,
+    private static List<DiffAnalizer> buildResult(Map<String, Object> data1, Map<String, Object> data2,
                                             TreeMap<String, Object> allData) {
-        java.util.List<String> diffs = new java.util.ArrayList<>();
-        allData.entrySet().stream()
+        List<DiffAnalizer> diffs = new ArrayList<>();
+
+        allData.keySet()
                 .forEach(i -> {
-                    if (data1.containsKey(i.getKey()) && !data2.containsKey(i.getKey())) {
-                        diffs.add(" - " + i.getKey() + ": " + i.getValue());
-                    } else if (!data1.containsKey(i.getKey()) && data2.containsKey(i.getKey())) {
-                        diffs.add(" + " + i.getKey() + ": " + i.getValue());
-                    } else if (data1.containsKey(i.getKey()) && data2.containsKey(i.getKey())) {
-                        if (data1.get(i.getKey()) == null || data2.get(i.getKey()) == null) {
-                            diffs.add(" - " + i.getKey() + ": " + data1.get(i.getKey()));
-                            diffs.add(" + "  +i.getKey() + ": " + data2.get(i.getKey()));
-                        } else if (data1.get(i.getKey()).equals(data2.get(i.getKey()))) {
-                            diffs.add("   " + i.getKey() + ": " + i.getValue());
-                        } else if (data1.get(i.getKey()) == data2.get(i.getKey())) {
-                            diffs.add("   " + i.getKey() + ": " + i.getValue());
+                    if (!data2.containsKey(i)) {
+                        diffs.add(new DiffAnalizer(i, allData.get(i), "-"));
+                    } else if (!data1.containsKey(i) && data2.containsKey(i)) {
+                        diffs.add(new DiffAnalizer(i, allData.get(i), "+"));
+                    } else if (data1.containsKey(i) && data2.containsKey(i)) {
+                        if (data1.get(i) == null || data2.get(i) == null) {
+                            diffs.add(new DiffAnalizer(i, data1.get(i), "-"));
+                            diffs.add(new DiffAnalizer(i, data2.get(i), "+"));
+                        } else if (data1.get(i).equals(data2.get(i))) {
+                            diffs.add(new DiffAnalizer(i, allData.get(i), "e"));
+                        } else if (data1.get(i) == data2.get(i)) {
+                            diffs.add(new DiffAnalizer(i, allData.get(i), "e"));
                         } else {
-                            diffs.add(" - " + i.getKey() + ": " + data1.get(i.getKey()));
-                            diffs.add(" + "  +i.getKey() + ": " + data2.get(i.getKey()));
+                            diffs.add(new DiffAnalizer(i, data1.get(i).toString(), "-"));
+                            diffs.add(new DiffAnalizer(i, data2.get(i).toString(), "+"));
                         }
                     }
 

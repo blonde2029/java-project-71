@@ -42,3 +42,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 /.idea/
+/file1.json
+/file2.json

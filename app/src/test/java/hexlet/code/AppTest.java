@@ -23,7 +23,7 @@ public class AppTest {
     public void appTestJSON() throws IOException {
         path1 = absolutePath + "/file1.json";
         path2 = absolutePath + "/file2.json";
-        String actual = String.valueOf(Differ.getDiffJSON(path1, path2));
+        String actual = Formatter.stylish(Differ.getDiffJSON(path1, path2));
         String expected = """
                  {
                     chars1: [a, b, c]
@@ -56,7 +56,7 @@ public class AppTest {
     public void appTestYAML() throws IOException {
         path1 = absolutePath + "/file1.yml";
         path2 = absolutePath + "/file2.yml";
-        String actual = String.valueOf(Differ.getDiffYAML(path1, path2));
+        String actual = Formatter.stylish(Differ.getDiffYAML(path1, path2));
         String expected = """
                 {
                  - follow: false

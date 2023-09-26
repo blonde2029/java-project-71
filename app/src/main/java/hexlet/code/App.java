@@ -12,7 +12,8 @@ import java.util.concurrent.Callable;
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
-    @Option(names = {"-f", "--format"}, defaultValue = "", description = "output format [default: stylish]")
+    @Option(names = {"-f", "--format"}, defaultValue = "${FORMAT:-stylish}",
+            description = "output format [${FORMAT:-stylish}]")
     private String format;
     @Parameters(index = "0", paramLabel = "filePath1", defaultValue = "", description = "path to first file")
     private String filePath1;
@@ -25,14 +26,14 @@ public class App implements Callable<Integer> {
     }
     @Override
     public Integer call() throws IOException {
-//        filePath1 = "file1.yml";
-//        filePath2 = "file2.yml";
+        filePath1 = "file1.yml";
+        filePath2 = "file2.yml";
         // найдем отличия
         if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
-            String result = String.valueOf(Differ.getDiffJSON(filePath1, filePath2));
+            String result = Formatter.stylish(Differ.getDiffJSON(filePath1, filePath2));
             System.out.println(result);
         } else if (filePath1.endsWith(".yml") && filePath2.endsWith(".yml")) {
-            String result = String.valueOf(Differ.getDiffYAML(filePath1, filePath2));
+            String result = Formatter.stylish(Differ.getDiffYAML(filePath1, filePath2));
             System.out.println(result);
         }
         return 0;
