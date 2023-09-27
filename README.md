@@ -4,4 +4,6 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b359ba0d56ab76bf34d4/test_coverage)](https://codeclimate.com/github/blonde2029/java-project-71/test_coverage)
 [![asciicast](https://asciinema.org/a/NqJFJTjUKwjxhx9kwoU31kbJJ.svg)](https://asciinema.org/a/NqJFJTjUKwjxhx9kwoU31kbJJ)
 [![asciicast](https://asciinema.org/a/oyFyr2MOaOZRKQolidfvm44yH.svg)](https://asciinema.org/a/oyFyr2MOaOZRKQolidfvm44yH)
+[![asciicast](https://asciinema.org/a/zDH2W9ASXo6ZQ2lsXuCpyM6ls.svg)](https://asciinema.org/a/zDH2W9ASXo6ZQ2lsXuCpyM6ls)
+
 
