@@ -27,8 +27,7 @@ public class Differ {
         allData.putAll(data1);
         allData.putAll(data2);
 
-        List<DiffAnalizer> diffs = buildResult(data1, data2, allData);
-        return diffs;
+        return buildResult(data1, data2, allData);
     }
     public static List<DiffAnalizer> getDiffYAML(String filePath1, String filePath2) throws IOException {
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
@@ -46,8 +45,7 @@ public class Differ {
         allData.putAll(data1);
         allData.putAll(data2);
 
-        List<DiffAnalizer> diffs = buildResult(data1, data2, allData);
-        return diffs;
+        return buildResult(data1, data2, allData);
     }
     private static List<DiffAnalizer> buildResult(Map<String, Object> data1, Map<String, Object> data2,
                                             TreeMap<String, Object> allData) {
@@ -56,20 +54,18 @@ public class Differ {
         allData.keySet()
                 .forEach(i -> {
                     if (!data2.containsKey(i)) {
-                        diffs.add(new DiffAnalizer(i, allData.get(i), "-"));
+                        diffs.add(new DiffAnalizer(i, data1.get(i), allData.get(i), "removed"));
                     } else if (!data1.containsKey(i) && data2.containsKey(i)) {
-                        diffs.add(new DiffAnalizer(i, allData.get(i), "+"));
+                        diffs.add(new DiffAnalizer(i, data2.get(i), allData.get(i), "added"));
                     } else if (data1.containsKey(i) && data2.containsKey(i)) {
                         if (data1.get(i) == null || data2.get(i) == null) {
-                            diffs.add(new DiffAnalizer(i, data1.get(i), "-"));
-                            diffs.add(new DiffAnalizer(i, data2.get(i), "+"));
+                            diffs.add(new DiffAnalizer(i, data1.get(i), data2.get(i), "changed"));
                         } else if (data1.get(i).equals(data2.get(i))) {
-                            diffs.add(new DiffAnalizer(i, allData.get(i), "e"));
+                            diffs.add(new DiffAnalizer(i, allData.get(i), allData.get(i), "equal"));
                         } else if (data1.get(i) == data2.get(i)) {
-                            diffs.add(new DiffAnalizer(i, allData.get(i), "e"));
+                            diffs.add(new DiffAnalizer(i, allData.get(i), allData.get(i), "equal"));
                         } else {
-                            diffs.add(new DiffAnalizer(i, data1.get(i).toString(), "-"));
-                            diffs.add(new DiffAnalizer(i, data2.get(i).toString(), "+"));
+                            diffs.add(new DiffAnalizer(i, data1.get(i), data2.get(i), "changed"));
                         }
                     }
 

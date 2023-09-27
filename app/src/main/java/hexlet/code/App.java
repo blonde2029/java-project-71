@@ -26,10 +26,16 @@ public class App implements Callable<Integer> {
     }
     @Override
     public Integer call() throws IOException {
-        filePath1 = "file1.yml";
-        filePath2 = "file2.yml";
+//        filePath1 = "file1.json";
+//        filePath2 = "file2.json";
         // найдем отличия
-        if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
+        if (filePath1.endsWith(".json") && filePath2.endsWith(".json") && format.equals("plain")) {
+            String result = Formatter.plain(Differ.getDiffJSON(filePath1, filePath2));
+            System.out.println(result);
+        } else if (filePath1.endsWith(".yml") && filePath2.endsWith(".yml") && format.equals("plain")) {
+            String result = Formatter.plain(Differ.getDiffYAML(filePath1, filePath2));
+            System.out.println(result);
+        } else if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
             String result = Formatter.stylish(Differ.getDiffJSON(filePath1, filePath2));
             System.out.println(result);
         } else if (filePath1.endsWith(".yml") && filePath2.endsWith(".yml")) {
