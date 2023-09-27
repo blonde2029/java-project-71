@@ -1,4 +1,6 @@
-package hexlet.code;
+package hexlet.code.formatters;
+
+import hexlet.code.DiffAnalizer;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,14 +13,14 @@ public class Formatter {
         data.stream()
                 .forEach(i -> {
                     if (i.getDifference().equals("removed")) {
-                        result.append(" - " + i.getKey() + ": " + i.getValue1() + "\n");
+                        result.append(" - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
                     } else if (i.getDifference().equals("added")) {
-                        result.append(" + " + i.getKey() + ": " + i.getValue2() + "\n");
+                        result.append(" + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
                     } else if (i.getDifference().equals("equal")) {
-                        result.append("   " + i.getKey() + ": " + i.getValue1() + "\n");
+                        result.append("   ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
                     } else if (i.getDifference().equals("changed")) {
-                        result.append(" - " + i.getKey() + ": " + i.getValue1() + "\n");
-                        result.append(" + " + i.getKey() + ": " + i.getValue2() + "\n");
+                        result.append(" - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
+                        result.append(" + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
                     }
                 });
         result.append("}");
@@ -30,33 +32,33 @@ public class Formatter {
         data.stream()
                 .forEach(i -> {
                     if (i.getDifference().equals("removed")) {
-                        result.append("Property '" + i.getKey() + "' was removed" + "\n");
+                        result.append("Property '").append(i.getKey()).append("' was removed").append("\n");
                     } else if (i.getDifference().equals("added")) {
-                        result.append("Property '" + i.getKey() + "' was added with value: ");
+                        result.append("Property '").append(i.getKey()).append("' was added with value: ");
                         if (i.getValue2() instanceof String) {
-                            result.append("'" + i.getValue2() + "'");
+                            result.append("'").append(i.getValue2()).append("'");
                         } else if (i.getValue2() instanceof Collection<?> || i.getValue2() instanceof Map<?, ?>) {
                             result.append("[complex value]");
                         } else {
-                            result.append("" + i.getValue2());
+                            result.append(i.getValue2());
                         }
                         result.append("\n");
                     } else if (i.getDifference().equals("changed")) {
-                        result.append("Property '" + i.getKey() + "' was updated. From ");
+                        result.append("Property '").append(i.getKey()).append("' was updated. From ");
                         if (i.getValue1() instanceof String) {
-                            result.append("'" + i.getValue1() + "'");
+                            result.append("'").append(i.getValue1()).append("'");
                         } else if (i.getValue1() instanceof Collection<?> || i.getValue1() instanceof Map<?, ?>) {
                             result.append("[complex value]");
                         } else {
-                            result.append("" + i.getValue1());
+                            result.append(i.getValue1());
                         }
                         result.append(" to ");
                         if (i.getValue2() instanceof String) {
-                            result.append("'" + i.getValue2() + "'");
+                            result.append("'").append(i.getValue2()).append("'");
                         } else if (i.getValue2() instanceof Collection<?> || i.getValue2() instanceof Map<?, ?>) {
                             result.append("[complex value]");
                         } else {
-                            result.append("" + i.getValue2());
+                            result.append(i.getValue2());
                         }
                         result.append("\n");
                     }

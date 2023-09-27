@@ -23,7 +23,8 @@ public class AppTest {
     public void appTestJSONStylish() throws IOException {
         path1 = absolutePath + "/file1.json";
         path2 = absolutePath + "/file2.json";
-        String actual = Formatter.stylish(Differ.getDiffJSON(path1, path2));
+        String format = "stylish";
+        String actual = Differ.getDiff(path1, path2, format);
         String expected = """
                  {
                     chars1: [a, b, c]
@@ -56,7 +57,8 @@ public class AppTest {
     public void appTestJSONPlain() throws IOException {
         path1 = absolutePath + "/file1.json";
         path2 = absolutePath + "/file2.json";
-        String actual = Formatter.plain(Differ.getDiffJSON(path1, path2));
+        String format = "plain";
+        String actual = Differ.getDiff(path1, path2, format);
         String expected = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -78,7 +80,8 @@ public class AppTest {
     public void appTestYAMLStylish() throws IOException {
         path1 = absolutePath + "/file1.yml";
         path2 = absolutePath + "/file2.yml";
-        String actual = Formatter.stylish(Differ.getDiffYAML(path1, path2));
+        String format = "stylish";
+        String actual = Differ.getDiff(path1, path2, format);
         String expected = """
                 {
                  - follow: false
