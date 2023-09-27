@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import hexlet.code.formatters.Formatter;
 
 
 public class Differ {
-    public static List<DiffAnalizer> getDiffJSON(String filePath1, String filePath2) throws IOException {
+    public static String getDiff(String filePath1, String filePath2, String format) throws IOException {
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
 
@@ -20,32 +21,26 @@ public class Differ {
 
         String content1 = Files.readString(path1);
         String content2 = Files.readString(path2);
-
-        Map<String, Object> data1 = Parser.getDataJSON(content1);
-        Map<String, Object> data2 = Parser.getDataJSON(content2);
-        TreeMap<String, Object> allData = new java.util.TreeMap<>();
-        allData.putAll(data1);
-        allData.putAll(data2);
-
-        return buildResult(data1, data2, allData);
-    }
-    public static List<DiffAnalizer> getDiffYAML(String filePath1, String filePath2) throws IOException {
-        Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
-        Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
-
-        isFileExists(path1);
-        isFileExists(path2);
-
-        String content1 = Files.readString(path1);
-        String content2 = Files.readString(path2);
-
-        Map<String, Object> data1 = Parser.getDataYAML(content1);
-        Map<String, Object> data2 = Parser.getDataYAML(content2);
+        Map<String, Object> data1 = new TreeMap<>();
+        Map<String, Object> data2 = new TreeMap<>();
+        if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
+            data1 = Parser.getDataJSON(content1);
+            data2 = Parser.getDataJSON(content2);
+        } else if (filePath1.endsWith(".yml") && filePath2.endsWith(".yml")) {
+            data1 = Parser.getDataYAML(content1);
+            data2 = Parser.getDataYAML(content2);
+        }
         TreeMap<String, Object> allData = new TreeMap<>();
         allData.putAll(data1);
         allData.putAll(data2);
-
-        return buildResult(data1, data2, allData);
+        List<DiffAnalizer> data = buildResult(data1, data2, allData);
+        String result;
+        if (format.equals("plain")) {
+            result = Formatter.plain(data);
+        } else {
+            result = Formatter.stylish(data);
+        }
+        return result;
     }
     private static List<DiffAnalizer> buildResult(Map<String, Object> data1, Map<String, Object> data2,
                                             TreeMap<String, Object> allData) {
