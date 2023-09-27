@@ -51,9 +51,9 @@ public class Differ {
         allData.keySet()
                 .forEach(i -> {
                     if (!data2.containsKey(i)) {
-                        diffs.add(new DiffAnalizer(i, data1.get(i), allData.get(i), "removed"));
+                        diffs.add(new DiffAnalizer(i, data1.get(i), null, "removed"));
                     } else if (!data1.containsKey(i) && data2.containsKey(i)) {
-                        diffs.add(new DiffAnalizer(i, data2.get(i), allData.get(i), "added"));
+                        diffs.add(new DiffAnalizer(i, null, data2.get(i), "added"));
                     } else if (data1.containsKey(i) && data2.containsKey(i)) {
                         if (data1.get(i) == null || data2.get(i) == null) {
                             diffs.add(new DiffAnalizer(i, data1.get(i), data2.get(i), "changed"));
