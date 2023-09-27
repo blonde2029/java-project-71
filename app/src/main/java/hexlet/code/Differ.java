@@ -37,8 +37,10 @@ public class Differ {
         String result;
         if (format.equals("plain")) {
             result = Formatter.plain(data);
-        } else {
+        } else if (!format.equals("json")) {
             result = Formatter.stylish(data);
+        } else {
+            result = Formatter.json(data);
         }
         return result;
     }

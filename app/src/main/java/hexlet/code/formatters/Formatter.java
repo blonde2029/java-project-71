@@ -1,5 +1,8 @@
 package hexlet.code.formatters;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import hexlet.code.DiffAnalizer;
 
 import java.util.Collection;
@@ -61,6 +64,22 @@ public class Formatter {
                             result.append(i.getValue2());
                         }
                         result.append("\n");
+                    }
+                });
+        return String.valueOf(result);
+    }
+    public static String json(List<DiffAnalizer> data) {
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        ObjectMapper objectMapper = new ObjectMapper();
+        StringBuilder result = new StringBuilder();
+        data.stream()
+                .forEach(i -> {
+                    try {
+                        //result.append(objectMapper.writeValueAsString(i));
+                        result.append(ow.writeValueAsString(i));
+                        result.append("\n");
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
                     }
                 });
         return String.valueOf(result);

@@ -25,8 +25,9 @@ public class App implements Callable<Integer> {
     }
     @Override
     public Integer call() throws IOException {
-//        filePath1 = "file1.json";
-//        filePath2 = "file2.json";
+        filePath1 = "file1.json";
+        filePath2 = "file2.json";
+        format = "json";
         // найдем отличия
         if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
             String result = Differ.getDiff(filePath1, filePath2, format);
