@@ -70,8 +70,7 @@ public class Differ {
         //получим отличия содержимого файлов
         List<DiffAnalizer> data = buildResult(data1, data2, allData);
         //выведем различия в нужном формате
-        String result = Formatter.stylish(data);
-        return result;
+        return Formatter.stylish(data);
     }
     private static List<DiffAnalizer> buildResult(Map<String, Object> data1, Map<String, Object> data2,
                                             TreeMap<String, Object> allData) {

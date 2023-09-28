@@ -52,6 +52,8 @@ public class AppTest {
                   + setting3: none
                  }""";
         assertThat(actual).isEqualTo(expected);
+        String actual2 = Differ.generate(path1, path2);
+        assertThat(actual2).isEqualTo(expected);
     }
     @Test
     public void appTestJSONPlain() throws IOException {
@@ -212,6 +214,8 @@ public class AppTest {
                 + setting3: none
                }""";
         assertThat(actual).isEqualTo(expected);
+        String actual2 = Differ.generate(path1, path2);
+        assertThat(actual2).isEqualTo(expected);
     }
     @Test
     public void appTestYAMLStylish2() throws IOException {
@@ -229,6 +233,8 @@ public class AppTest {
                  + verbose: true
                 }""";
         assertThat(actual).isEqualTo(expected);
+        String actual2 = Differ.generate(path1, path2);
+        assertThat(actual2).isEqualTo(expected);
     }
     @Test
     public void appTestYAMLPlain1() throws IOException {
