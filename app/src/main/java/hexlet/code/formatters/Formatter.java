@@ -66,7 +66,7 @@ public class Formatter {
                         result.append("\n");
                     }
                 });
-        return String.valueOf(result);
+        return String.valueOf(result).trim();
     }
     public static String json(List<DiffAnalizer> data) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();

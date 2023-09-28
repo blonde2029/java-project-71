@@ -74,8 +74,7 @@ public class AppTest {
                 Property 'obj1' was added with value: [complex value]
                 Property 'setting1' was updated. From 'Some value' to 'Another value'
                 Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'
-                """;
+                Property 'setting3' was updated. From true to 'none'""";
         assertThat(actual).isEqualTo(expected);
     }
     @Test
@@ -188,7 +187,7 @@ public class AppTest {
         String format = "stylish";
         String actual = Differ.generate(path1, path2, format);
         String expected = """
-               {
+              {
                   chars1: [a, b, c]
                 - chars2: [d, e, f]
                 + chars2: false
@@ -212,7 +211,7 @@ public class AppTest {
                 + setting2: 300
                 - setting3: true
                 + setting3: none
-               }""";
+              }""";
         assertThat(actual).isEqualTo(expected);
         String actual2 = Differ.generate(path1, path2);
         assertThat(actual2).isEqualTo(expected);
@@ -224,14 +223,14 @@ public class AppTest {
         String format = "stylish";
         String actual = Differ.generate(path1, path2, format);
         String expected = """
-                {
+               {
                  - follow: false
                    host: hexlet.io
                  - proxy: 123.234.53.22
                  - timeout: 50
                  + timeout: 29
                  + verbose: true
-                }""";
+               }""";
         assertThat(actual).isEqualTo(expected);
         String actual2 = Differ.generate(path1, path2);
         assertThat(actual2).isEqualTo(expected);
@@ -255,8 +254,7 @@ public class AppTest {
                 Property 'obj1' was added with value: [complex value]
                 Property 'setting1' was updated. From 'Some value' to 'Another value'
                 Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'
-                """;
+                Property 'setting3' was updated. From true to 'none'""";
         assertThat(actual).isEqualTo(expected);
     }
     @Test
@@ -269,8 +267,7 @@ public class AppTest {
                 Property 'follow' was removed
                 Property 'proxy' was removed
                 Property 'timeout' was updated. From 50 to 29
-                Property 'verbose' was added with value: true
-                """;
+                Property 'verbose' was added with value: true""";
         assertThat(actual).isEqualTo(expected);
     }
     @Test
