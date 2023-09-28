@@ -9,11 +9,11 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
-    String path1;
-    String path2;
-    String absolutePath;
+    private String path1;
+    private String path2;
+    private String absolutePath;
     @BeforeEach
-    void beforeEach() {
+    final void beforeEach() {
         String path = "src/test/resources";
         File file = new File(path);
         absolutePath = file.getAbsolutePath();

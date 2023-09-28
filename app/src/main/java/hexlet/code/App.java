@@ -24,7 +24,7 @@ public class App implements Callable<Integer> {
         System.exit(exitCode);
     }
     @Override
-    public Integer call() throws IOException {
+    public final Integer call() throws IOException {
         // найдем отличия
         if (!format.isEmpty()) {
             if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
