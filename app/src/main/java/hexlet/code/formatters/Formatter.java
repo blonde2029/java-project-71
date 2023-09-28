@@ -16,14 +16,14 @@ public class Formatter {
         data.stream()
                 .forEach(i -> {
                     if (i.getDifference().equals("removed")) {
-                        result.append(" - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
+                        result.append("  - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
                     } else if (i.getDifference().equals("added")) {
-                        result.append(" + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
+                        result.append("  + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
                     } else if (i.getDifference().equals("equal")) {
-                        result.append("   ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
+                        result.append("    ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
                     } else if (i.getDifference().equals("changed")) {
-                        result.append(" - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
-                        result.append(" + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
+                        result.append("  - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
+                        result.append("  + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
                     }
                 });
         result.append("}");

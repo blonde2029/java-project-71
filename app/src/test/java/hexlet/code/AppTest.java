@@ -26,7 +26,7 @@ public class AppTest {
         String format = "stylish";
         String actual = Differ.generate(path1, path2, format);
         String expected = """
-                 {
+                {
                     chars1: [a, b, c]
                   - chars2: [d, e, f]
                   + chars2: false
@@ -50,7 +50,7 @@ public class AppTest {
                   + setting2: 300
                   - setting3: true
                   + setting3: none
-                 }""";
+                }""";
         assertThat(actual).isEqualTo(expected);
         String actual2 = Differ.generate(path1, path2);
         assertThat(actual2).isEqualTo(expected);
