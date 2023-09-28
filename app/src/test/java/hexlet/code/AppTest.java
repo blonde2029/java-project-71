@@ -24,7 +24,7 @@ public class AppTest {
         path1 = absolutePath + "/file1.json";
         path2 = absolutePath + "/file2.json";
         String format = "stylish";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                  {
                     chars1: [a, b, c]
@@ -58,7 +58,7 @@ public class AppTest {
         path1 = absolutePath + "/file1.json";
         path2 = absolutePath + "/file2.json";
         String format = "plain";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -81,7 +81,7 @@ public class AppTest {
         path1 = absolutePath + "/file1.json";
         path2 = absolutePath + "/file2.json";
         String format = "json";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                   {
                     "key" : "chars1",
@@ -184,7 +184,7 @@ public class AppTest {
         path1 = absolutePath + "/file1.yml";
         path2 = absolutePath + "/file2.yml";
         String format = "stylish";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                {
                   chars1: [a, b, c]
@@ -218,7 +218,7 @@ public class AppTest {
         path1 = absolutePath + "/file1small.yml";
         path2 = absolutePath + "/file2small.yml";
         String format = "stylish";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                 {
                  - follow: false
@@ -235,7 +235,7 @@ public class AppTest {
         path1 = absolutePath + "/file1.yml";
         path2 = absolutePath + "/file2.yml";
         String format = "plain";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -258,7 +258,7 @@ public class AppTest {
         path1 = absolutePath + "/file1small.yml";
         path2 = absolutePath + "/file2small.yml";
         String format = "plain";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                 Property 'follow' was removed
                 Property 'proxy' was removed
@@ -272,7 +272,7 @@ public class AppTest {
         path1 = absolutePath + "/file1small.yml";
         path2 = absolutePath + "/file2small.yml";
         String format = "json";
-        String actual = Differ.getDiff(path1, path2, format);
+        String actual = Differ.generate(path1, path2, format);
         String expected = """
                   {
                     "key" : "follow",

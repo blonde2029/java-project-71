@@ -12,7 +12,42 @@ import hexlet.code.formatters.Formatter;
 
 
 public class Differ {
-    public static String getDiff(String filePath1, String filePath2, String format) throws IOException {
+    public static String generate(String filePath1, String filePath2, String format) throws IOException {
+        Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
+        Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
+        //проверим существуют ли файлы
+        isFileExists(path1);
+        isFileExists(path2);
+        //получим содержимое файлов
+        String content1 = Files.readString(path1);
+        String content2 = Files.readString(path2);
+        Map<String, Object> data1 = new TreeMap<>();
+        Map<String, Object> data2 = new TreeMap<>();
+        if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
+            data1 = Parser.getDataJSON(content1);
+            data2 = Parser.getDataJSON(content2);
+        } else if (filePath1.endsWith(".yml") && filePath2.endsWith(".yml")) {
+            data1 = Parser.getDataYAML(content1);
+            data2 = Parser.getDataYAML(content2);
+        }
+        TreeMap<String, Object> allData = new TreeMap<>();
+        allData.putAll(data1);
+        allData.putAll(data2);
+        //получим отличия содержимого файлов
+        List<DiffAnalizer> data = buildResult(data1, data2, allData);
+        String result;
+        //выведем различия в нужном формате
+        if (format.equals("plain")) {
+            result = Formatter.plain(data);
+        } else if (!format.equals("json")) {
+            result = Formatter.stylish(data);
+        } else {
+            result = Formatter.json(data);
+        }
+        return result;
+    }
+    public static String generate(String filePath1, String filePath2) throws IOException {
+        String format = "stylish";
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
         //проверим существуют ли файлы
