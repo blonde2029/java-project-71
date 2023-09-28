@@ -12,7 +12,7 @@ import hexlet.code.formatters.Formatter;
 
 
 public class Differ {
-    public static String getDiff(String filePath1, String filePath2, String format) throws IOException {
+    public static String generate(String filePath1, String filePath2, String format) throws IOException {
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
         //проверим существуют ли файлы

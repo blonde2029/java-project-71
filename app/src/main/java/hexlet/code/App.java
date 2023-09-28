@@ -27,10 +27,10 @@ public class App implements Callable<Integer> {
     public Integer call() throws IOException {
         // найдем отличия
         if (filePath1.endsWith(".json") && filePath2.endsWith(".json")) {
-            String result = Differ.getDiff(filePath1, filePath2, format);
+            String result = Differ.generate(filePath1, filePath2, format);
             System.out.println(result);
         } else if (filePath1.endsWith(".yml") && filePath2.endsWith(".yml")) {
-            String result = Differ.getDiff(filePath1, filePath2, format);
+            String result = Differ.generate(filePath1, filePath2, format);
             System.out.println(result);
         } else {
             System.out.println("Wrong extension");
