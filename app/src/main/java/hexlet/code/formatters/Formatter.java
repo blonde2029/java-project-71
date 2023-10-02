@@ -82,6 +82,6 @@ public class Formatter {
                         throw new RuntimeException(e);
                     }
                 });
-        return String.valueOf(result);
+        return String.valueOf(result).trim();
     }
 }
