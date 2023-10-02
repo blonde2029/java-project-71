@@ -67,7 +67,7 @@ public class AppTest {
         String expected = readFromFixture("ExpectedJson.txt");
         assertThat(actual).isEqualTo(expected);
     }
-    public String readFromFixture(String fixture) throws IOException {
+    public final String readFromFixture(String fixture) throws IOException {
         return Files.readString(Path.of(absolutePath + "/" + fixture)).trim();
     }
 }
