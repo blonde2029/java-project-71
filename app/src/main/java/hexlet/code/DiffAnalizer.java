@@ -23,6 +23,4 @@ public class DiffAnalizer {
     public final String getDifference() {
         return  difference;
     }
-
-
 }

@@ -1,35 +1,13 @@
 package hexlet.code.formatters;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import hexlet.code.DiffAnalizer;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class Formatter {
-    public static String stylish(List<DiffAnalizer> data) {
-        StringBuilder result = new StringBuilder();
-        result.append("{\n");
-        data.stream()
-                .forEach(i -> {
-                    if (i.getDifference().equals("removed")) {
-                        result.append("  - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
-                    } else if (i.getDifference().equals("added")) {
-                        result.append("  + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
-                    } else if (i.getDifference().equals("equal")) {
-                        result.append("    ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
-                    } else if (i.getDifference().equals("changed")) {
-                        result.append("  - ").append(i.getKey()).append(": ").append(i.getValue1()).append("\n");
-                        result.append("  + ").append(i.getKey()).append(": ").append(i.getValue2()).append("\n");
-                    }
-                });
-        result.append("}");
-        return String.valueOf(result);
-    }
-    public static String plain(List<DiffAnalizer> data) {
+public class PlainFormatter {
+    public static String format(List<DiffAnalizer> data) {
         StringBuilder result = new StringBuilder();
 
         data.stream()
@@ -64,22 +42,6 @@ public class Formatter {
                             result.append(i.getValue2());
                         }
                         result.append("\n");
-                    }
-                });
-        return String.valueOf(result).trim();
-    }
-    public static String json(List<DiffAnalizer> data) {
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        ObjectMapper objectMapper = new ObjectMapper();
-        StringBuilder result = new StringBuilder();
-        data.stream()
-                .forEach(i -> {
-                    try {
-                        //result.append(objectMapper.writeValueAsString(i));
-                        result.append(ow.writeValueAsString(i));
-                        result.append("\n");
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
                     }
                 });
         return String.valueOf(result).trim();

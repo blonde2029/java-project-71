@@ -32,7 +32,7 @@ public class AppTest {
         String actual = Differ.generate(path1Json, path2Json, "stylish");
         String expected = readFromFixture("ExpectedStylish.txt");
         assertThat(actual).isEqualTo(expected);
-        String actual2 = Differ.generate(path1Json, path2Json);
+        String actual2 = Differ.generate(path1Json, path2Json, "");
         assertThat(actual2).isEqualTo(expected);
     }
     @Test
@@ -52,7 +52,7 @@ public class AppTest {
         String actual = Differ.generate(path1Yaml, path2Yaml, "stylish");
         String expected = readFromFixture("ExpectedStylish.txt");
         assertThat(actual).isEqualTo(expected);
-        String actual2 = Differ.generate(path1Yaml, path2Yaml);
+        String actual2 = Differ.generate(path1Yaml, path2Yaml, "");
         assertThat(actual2).isEqualTo(expected);
     }
     @Test

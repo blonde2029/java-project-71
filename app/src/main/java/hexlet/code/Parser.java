@@ -10,7 +10,7 @@ import java.util.Map;
 public class Parser {
     public static Map<String, Object> getDataJSON(String content) {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> data = null;
+        Map<String, Object> data;
         TypeReference<HashMap<String, Object>> typeReference = new TypeReference<>() { };
         try {
             data = mapper.readValue(content, typeReference);
@@ -21,7 +21,7 @@ public class Parser {
     }
     public static Map<String, Object> getDataYAML(String content) {
         ObjectMapper mapper = new YAMLMapper();
-        Map<String, Object> data = null;
+        Map<String, Object> data;
         TypeReference<java.util.HashMap<String, Object>> typeReference = new TypeReference<>() { };
         try {
             data = mapper.readValue(content, typeReference);
