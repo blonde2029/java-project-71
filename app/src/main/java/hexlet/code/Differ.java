@@ -48,6 +48,9 @@ public class Differ {
         }
         return result;
     }
+    public static String generate(String filePath1, String filePath2) throws IOException {
+        return generate(filePath1, filePath2, "stylish");
+    }
     private static List<DiffAnalizer> buildResult(Map<String, Object> data1, Map<String, Object> data2,
                                             TreeMap<String, Object> allData) {
         List<DiffAnalizer> diffs = new ArrayList<>();
