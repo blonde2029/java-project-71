@@ -29,11 +29,6 @@ public class Differ {
         Files.exists(path);
         String content = Files.readString(path);
         Map<String, Object> data = new TreeMap<>();
-//        if (filePath.endsWith(".json")) {
-//            data = Parser.getDataJSON(content);
-//        } else if (filePath.endsWith(".yml")) {
-//            data = Parser.getDataYAML(content);
-//        }
         if (filePath.endsWith(".json")) {
             data = Parser.getData(content, "json");
         } else if (filePath.endsWith(".yml")) {
