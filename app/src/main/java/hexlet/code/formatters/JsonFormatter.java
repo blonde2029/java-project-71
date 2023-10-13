@@ -3,12 +3,11 @@ package hexlet.code.formatters;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import hexlet.code.DiffAnalizer;
-
 import java.util.List;
+import java.util.Map;
 
 public class JsonFormatter {
-    public static String format(List<DiffAnalizer> data) {
+    public static String format(List<Map<Object, Object>> data) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         StringBuilder result = new StringBuilder();
         data.stream()
