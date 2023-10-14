@@ -1,93 +1,88 @@
 {
   "field" : "chars1",
+  "changeType" : "equal",
   "oldValue" : [ "a", "b", "c" ],
-  "newValue" : [ "a", "b", "c" ],
-  "changeType" : "equal"
+  "newValue" : [ "a", "b", "c" ]
 }
 {
   "field" : "chars2",
+  "changeType" : "changed",
   "oldValue" : [ "d", "e", "f" ],
-  "newValue" : false,
-  "changeType" : "changed"
+  "newValue" : false
 }
 {
   "field" : "checked",
+  "changeType" : "changed",
   "oldValue" : false,
-  "newValue" : true,
-  "changeType" : "changed"
+  "newValue" : true
 }
 {
   "field" : "default",
+  "changeType" : "changed",
   "oldValue" : null,
-  "newValue" : [ "value1", "value2" ],
-  "changeType" : "changed"
+  "newValue" : [ "value1", "value2" ]
 }
 {
   "field" : "id",
+  "changeType" : "changed",
   "oldValue" : 45,
-  "newValue" : null,
-  "changeType" : "changed"
+  "newValue" : null
 }
 {
   "field" : "key1",
-  "oldValue" : "value1",
-  "newValue" : null,
-  "changeType" : "removed"
+  "changeType" : "removed",
+  "oldValue" : "value1"
 }
 {
   "field" : "key2",
-  "oldValue" : null,
-  "newValue" : "value2",
-  "changeType" : "added"
+  "changeType" : "added",
+  "newValue" : "value2"
 }
 {
   "field" : "numbers1",
+  "changeType" : "equal",
   "oldValue" : [ 1, 2, 3, 4 ],
-  "newValue" : [ 1, 2, 3, 4 ],
-  "changeType" : "equal"
+  "newValue" : [ 1, 2, 3, 4 ]
 }
 {
   "field" : "numbers2",
+  "changeType" : "changed",
   "oldValue" : [ 2, 3, 4, 5 ],
-  "newValue" : [ 22, 33, 44, 55 ],
-  "changeType" : "changed"
+  "newValue" : [ 22, 33, 44, 55 ]
 }
 {
   "field" : "numbers3",
-  "oldValue" : [ 3, 4, 5 ],
-  "newValue" : null,
-  "changeType" : "removed"
+  "changeType" : "removed",
+  "oldValue" : [ 3, 4, 5 ]
 }
 {
   "field" : "numbers4",
-  "oldValue" : null,
-  "newValue" : [ 4, 5, 6 ],
-  "changeType" : "added"
+  "changeType" : "added",
+  "newValue" : [ 4, 5, 6 ]
 }
 {
   "field" : "obj1",
-  "oldValue" : null,
+  "changeType" : "added",
   "newValue" : {
     "nestedKey" : "value",
     "isNested" : true
-  },
-  "changeType" : "added"
+  }
 }
 {
   "field" : "setting1",
+  "changeType" : "changed",
   "oldValue" : "Some value",
-  "newValue" : "Another value",
-  "changeType" : "changed"
+  "newValue" : "Another value"
 }
 {
   "field" : "setting2",
+  "changeType" : "changed",
   "oldValue" : 200,
-  "newValue" : 300,
-  "changeType" : "changed"
+  "newValue" : 300
 }
 {
   "field" : "setting3",
+  "changeType" : "changed",
   "oldValue" : true,
-  "newValue" : "none",
-  "changeType" : "changed"
+  "newValue" : "none"
 }

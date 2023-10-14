@@ -14,12 +14,12 @@ public class Comparator {
                 .forEach((i -> {
                     Map<Object, Object> elem = new LinkedHashMap<>();
                     elem.put("field", i);
-                    elem.put("oldValue", data1.get(i));
-                    elem.put("newValue", data2.get(i));
                     if (!data2.containsKey(i)) {
                         elem.put("changeType", "removed");
+                        elem.put("oldValue", data1.get(i));
                     } else if (!data1.containsKey(i) && data2.containsKey(i)) {
                         elem.put("changeType", "added");
+                        elem.put("newValue", data2.get(i));
                     } else if (data1.containsKey(i) && data2.containsKey(i)) {
                         if (data1.get(i) == null || data2.get(i) == null) {
                             elem.put("changeType", "changed");
@@ -30,6 +30,8 @@ public class Comparator {
                         } else {
                             elem.put("changeType", "changed");
                         }
+                        elem.put("oldValue", data1.get(i));
+                        elem.put("newValue", data2.get(i));
                     }
                     comparedValues.add(elem);
                 }));
