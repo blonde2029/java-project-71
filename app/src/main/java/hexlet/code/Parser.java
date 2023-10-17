@@ -8,12 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Parser {
-    public static Map<String, Object> getData(String content, String extension) {
+    public static Map<String, Object> getData(String content, String extension) throws Exception {
         ObjectMapper mapper;
         if (extension.equals("json")) {
             mapper = new ObjectMapper();
-        } else {
+        } else if (extension.equals("yml")) {
             mapper = new YAMLMapper();
+        } else {
+            throw new Exception("Unknown format: '" + extension + "'");
         }
         Map<String, Object> data;
         TypeReference<HashMap<String, Object>> typeReference = new TypeReference<>() { };

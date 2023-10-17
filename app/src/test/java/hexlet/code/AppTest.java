@@ -26,43 +26,50 @@ public class AppTest {
         path1Yaml = absolutePath + "/file1.yml";
         path2Yaml = absolutePath + "/file2.yml";
     }
-
     @Test
-    public void appTestJSONStylish() throws IOException {
-        String actual = Differ.generate(path1Json, path2Json, "stylish");
+    public void appTestJSON2Arguments() throws Exception {
         String expected = readFromFixture("ExpectedStylish.txt");
-        assertThat(actual).isEqualTo(expected);
         String actual2 = Differ.generate(path1Json, path2Json);
         assertThat(actual2).isEqualTo(expected);
     }
     @Test
-    public void appTestJSONPlain() throws IOException {
+    public void appTestYAML2Arguments() throws Exception {
+        String expected = readFromFixture("ExpectedStylish.txt");
+        String actual2 = Differ.generate(path1Yaml, path2Yaml);
+        assertThat(actual2).isEqualTo(expected);
+    }
+    @Test
+    public void appTestJSONStylish() throws Exception {
+        String actual = Differ.generate(path1Json, path2Json, "stylish");
+        String expected = readFromFixture("ExpectedStylish.txt");
+        assertThat(actual).isEqualTo(expected);
+    }
+    @Test
+    public void appTestJSONPlain() throws Exception {
         String actual = Differ.generate(path1Json, path2Json, "plain");
         String expected = readFromFixture("ExpectedPlain.txt");
         assertThat(actual).isEqualTo(expected);
     }
     @Test
-    public void appTestJSONJson() throws IOException {
+    public void appTestJSONJson() throws Exception {
         String actual = Differ.generate(path1Json, path2Json, "json");
         String expected = readFromFixture("ExpectedJson.txt");
         assertThat(actual).isEqualTo(expected);
     }
     @Test
-    public void appTestYAMLStylish() throws IOException {
+    public void appTestYAMLStylish() throws Exception {
         String actual = Differ.generate(path1Yaml, path2Yaml, "stylish");
         String expected = readFromFixture("ExpectedStylish.txt");
         assertThat(actual).isEqualTo(expected);
-        String actual2 = Differ.generate(path1Yaml, path2Yaml);
-        assertThat(actual2).isEqualTo(expected);
     }
     @Test
-    public void appTestYAMLPlain() throws IOException {
+    public void appTestYAMLPlain() throws Exception {
         String actual = Differ.generate(path1Yaml, path2Yaml, "plain");
         String expected = readFromFixture("ExpectedPlain.txt");
         assertThat(actual).isEqualTo(expected);
     }
     @Test
-    public void appTestYAMLJson() throws IOException {
+    public void appTestYAMLJson() throws Exception {
         String actual = Differ.generate(path1Yaml, path2Yaml, "json");
         String expected = readFromFixture("ExpectedJson.txt");
         assertThat(actual).isEqualTo(expected);
