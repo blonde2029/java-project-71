@@ -15,7 +15,7 @@ public class Parser {
         } else if (extension.equals("yml")) {
             mapper = new YAMLMapper();
         } else {
-            throw new Exception("Unknown format: '" + extension + "'");
+            throw new Exception("Unknown extension: '" + extension + "'");
         }
         Map<String, Object> data;
         TypeReference<HashMap<String, Object>> typeReference = new TypeReference<>() { };

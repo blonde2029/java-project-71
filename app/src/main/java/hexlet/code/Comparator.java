@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Comparator {
-    public static List<Map<Object, Object>> compare(Map<String, Object> data1, Map<String, Object> data2,
-                                                    TreeMap<String, Object> allData) {
+    public static List<Map<Object, Object>> compare(Map<String, Object> data1, Map<String, Object> data2) {
+        TreeMap<String, Object> allData = new TreeMap<>();
+        allData.putAll(data1);
+        allData.putAll(data2);
         List<Map<Object, Object>> comparedValues = new ArrayList<>();
         allData.keySet()
                 .forEach((i -> {
